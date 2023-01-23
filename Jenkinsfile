@@ -14,6 +14,7 @@ pipeline {
     parameters {
         string(name: 'GROUP_SIZE', defaultValue: 'default', description: 'tamaño del grupo')
         string(name: 'PROJECT', defaultValue: 'default', description: 'Nombre del proyecto')
+        string(name: 'NAMESPACE', defaultValue: 'default', description: 'Nombre del namespace
     }
 }
 
