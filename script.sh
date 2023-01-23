@@ -5,14 +5,9 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 
-# Prompt for namespace
-read -p "Enter the namespace: " namespace
-
-# Prompt for group size
-read -p "Enter the group size (max 20): " group_size
-
-#Prompt project
-read -p "Enter the project name:" project
+namespace=${NAMESPACE}
+group_size=${GROUP_SIZE}
+project=${PROJECT}
 
 oc login -u system:admin -n $project
 
