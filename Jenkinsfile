@@ -6,6 +6,16 @@ pipeline {
             defaultValue:"",
             description:"",
             )
+        string(
+            name: "group_size",
+            defaultValue:"",
+            description:"",
+            )
+        string(
+            name: "project",
+            defaultValue:"",
+            description:"",
+            )
     }
     stages {
 
