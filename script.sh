@@ -1,45 +1,56 @@
-while getopts s:t:p:i:l:g: flag; do
+#!/bin/bash
+
+while getopts s:t:p:i:l:g:x flag; do
   case "${flag}" in
   s) server=${OPTARG} ;;
   t) token=${OPTARG} ;;
   p) project=${OPTARG} ;;
-  i) interval=${OPTARG} ;;
+  i) namespace=${OPTARG};;
   l) label=${OPTARG} ;;
+  g) group_size=${OPTARG};;
+  
   esac
 done
 
-
 echo "Project: $project"
 echo "Group size: $group_size"
+echo "namespace: $namespace"
 
-oc login -u system:admin -n ${project}
+# Validate group size
+if [ ${group_size} -gt 20 ]; then
+    echo -e "Error: Group size cannot be greater than 20."
+    exit 1
+fi
 
-deployments="./oc.exe get deploymentconfig -o name  -l '$label'"
-values=$(eval "$deployments")
+# Obtiene una lista de todos los despliegues en el namespace
+deployments=($(oc get dc -n ${namespace} -o jsonpath='{.items[*].metadata.name}'))
 
-# Define the counter and total number of deployments
+# Define el contador
 counter=0
-total_deployments=${#values[@]}
 
-for dc in ${values}
-do
-   echo "Restart $dc "
-   pod="$(cut -d'/' -f2 <<<$dc)"
-   # Validate that the total number of deployments does not exceed 20
-   if [ $counter -lt 20 ]; then
-        sleep $interval
-        # Check the counter value before restarting
-        if [ $(($counter % 2)) -eq 0 ]; then
-            oc rollout latest  $dc
-            oc rollout.exe status $dc --timeout=10m
-        else
-            oc rollout latest  $dc
-            oc rollout status $dc --timeout=10m
-        fi
-        counter=$((counter+1))
-   else
-        echo "Total number of deployments exceeded 20"
-        exit 1
-   fi
+# Define el índice del despliegue actual
+index=0
+
+# Obtiene el número total de despliegues
+total_deployments=${#deployments[@]}
+
+
+# Itera mientras queden despliegues por reiniciar
+while [ $index -lt $total_deployments ]; do
+    # Reinicia el despliegue actual
+    if ! oc rollout latest -n ${namespace} dc/${deployments[$index]}; then
+        echo -e "Error: Deployment ${deployments[$index]} failed."
+    fi
+    counter=$((counter+1))
+    index=$((index+1))
+    # Si el contador alcanza el tamaño del grupo o no quedan más despliegues por reiniciar, espera antes de continuar
+    if [ $counter -eq ${group_size} ] || [ $index -eq $total_deployments ]; then
+        counter=0
+        # espera hasta que se complete el despliegue anterior
+        oc rollout status -w -n ${namespace} dc/${deployments[$index-1]}
+        #sleep 10s
+    fi
 done
-oc delete pods --field-selector status.phase!=Running
+
+# Success message
+echo -e "Deployment completed successfully!"
