@@ -1,9 +1,7 @@
 #!/bin/bash
-namespace=${NAMESPACE}
-group_size=${GROUP_SIZE}
-project=${PROJECT}
 
-./oc login -u system:admin -n $project
+
+oc login -u system:admin -n $project
 
 # Validate group size
 if [ $group_size -gt 20 ]; then
@@ -12,7 +10,7 @@ if [ $group_size -gt 20 ]; then
 fi
 
 # Obtiene una lista de todos los despliegues en el namespace
-deployments=($(./oc get dc -n $namespace -o jsonpath='{.items[*].metadata.name}'))
+deployments=($(oc get dc -n $namespace -o jsonpath='{.items[*].metadata.name}'))
 
 # Define el contador
 counter=0
@@ -27,7 +25,7 @@ total_deployments=${#deployments[@]}
 # Itera mientras queden despliegues por reiniciar
 while [ $index -lt $total_deployments ]; do
     # Reinicia el despliegue actual
-    if ! ./oc rollout latest -n $namespace dc/${deployments[$index]}; then
+    if ! oc rollout latest -n $namespace dc/${deployments[$index]}; then
         echo -e "Error: Deployment ${deployments[$index]} failed."
     fi
     counter=$((counter+1))
@@ -36,7 +34,7 @@ while [ $index -lt $total_deployments ]; do
     if [ $counter -eq $group_size ] || [ $index -eq $total_deployments ]; then
         counter=0
         # espera hasta que se complete el despliegue anterior
-        ./oc rollout status -w -n $namespace dc/${deployments[$index-1]}
+        oc rollout status -w -n $namespace dc/${deployments[$index-1]}
         #sleep 10s
     fi
 done
