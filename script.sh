@@ -4,7 +4,7 @@
 
 
 
-oc login -u system:admin -n ${project}
+oc login -u system:admin -n $project
 
 # Validate group size
 if [ $group_size -gt 20 ]; then
