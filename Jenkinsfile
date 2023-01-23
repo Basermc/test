@@ -7,13 +7,13 @@ pipeline {
         stage('Ejecutar script') {
             steps {
                 script {
-                    sh "bash script.sh  -n ${params.PROJECT} -g ${params.GROUP_SIZE}"
+                    sh "bash script.sh  -n ${params.project} -g ${params.group_size}"
                 }
             }
         }
     }
     parameters {
-        string(name: 'PROJECT', defaultValue: 'santander-dev', description: 'Nombre del proyecto')
-        string(name: 'GROUP_SIZE', defaultValue: '2', description: 'Tamaño del grupo de despliegues')
+        string(name: 'project', defaultValue: 'santander-dev', description: 'Nombre del proyecto')
+        string(name: 'group_size', defaultValue: '2', description: 'Tamaño del grupo de despliegues')
     }
 }
