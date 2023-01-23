@@ -6,6 +6,7 @@ pipeline {
             defaultValue:"",
             description:"",
             )
+    }
     stages {
 
         stage('Ejecutar script') {
