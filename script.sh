@@ -2,9 +2,9 @@
 
 
 
-namespace=${NAMESPACE}
-group_size=${GROUP_SIZE}
-project=${PROJECT}
+namespace=${namespace}
+group_size=${group_size}
+project=${project}
 
 oc login -u system:admin -n $project
 
