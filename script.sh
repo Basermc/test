@@ -1,8 +1,5 @@
 #!/bin/bash
 
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
 
 
 namespace=${NAMESPACE}
@@ -13,7 +10,7 @@ oc login -u system:admin -n $project
 
 # Validate group size
 if [ $group_size -gt 20 ]; then
-    echo -e "${RED}Error:${NC} Group size cannot be greater than 20."
+    echo -e "Error: Group size cannot be greater than 20."
     exit 1
 fi
 
@@ -34,7 +31,7 @@ total_deployments=${#deployments[@]}
 while [ $index -lt $total_deployments ]; do
     # Reinicia el despliegue actual
     if ! oc rollout latest -n $namespace dc/${deployments[$index]}; then
-        echo -e "${RED}Error:${NC} Deployment ${deployments[$index]} failed."
+        echo -e "Error: Deployment ${deployments[$index]} failed."
     fi
     counter=$((counter+1))
     index=$((index+1))
@@ -48,4 +45,4 @@ while [ $index -lt $total_deployments ]; do
 done
 
 # Success message
-echo -e "${BLUE}Deployment completed successfully!${NC}"
+echo -e "Deployment completed successfully!"
