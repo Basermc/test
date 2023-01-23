@@ -1,3 +1,6 @@
+PROJECT = [['santander-dev']]
+SERVER = [['192.168.99.101:8443']]
+
 pipeline {
     agent any
     stages {
