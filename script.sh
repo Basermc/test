@@ -1,9 +1,7 @@
 #!/bin/bash
 
 
-namespace=${NAMESPACE}
-group_size=${GROUP_SIZE}
-project=${PROJECT}
+
 
 ./oc.exe login -u system:admin -n $project
 
