@@ -7,7 +7,7 @@ pipeline {
         stage('Ejecutar script') {
             steps {
                 script {
-                    sh "bash script.sh  -n ${params.project} -g ${params.group_size} -s=${params.server}"
+                    sh "bash script.sh  -n ${params.project} -g ${params.group_size} --server=${params.server}"
                 }
             }
         }
