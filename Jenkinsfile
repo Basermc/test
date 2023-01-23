@@ -14,7 +14,6 @@ pipeline {
     }
     parameters {
         string(name: 'PROJECT', defaultValue: 'santander-dev', description: 'Nombre del proyecto')
-        string(name: 'SERVER', defaultValue: 'localhost:8443', description: 'Nombre del server')
         string(name: 'GROUP_SIZE', defaultValue: '2', description: 'Tamaño del grupo de despliegues')
     }
 }
