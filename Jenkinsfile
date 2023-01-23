@@ -4,7 +4,7 @@ pipeline {
         stage('Ejecutar script') {
             steps {
                 script {
-                    sh "bash script.sh -i ${params.NAMESPACE} -p ${params.PROJECT} -g ${params.GROUP_SIZE}"
+                    sh "bash script.sh  -n ${params.PROJECT} -g ${params.GROUP_SIZE}"
                 }
             }
         }
