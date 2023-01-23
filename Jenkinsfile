@@ -110,7 +110,7 @@ pipeline {
 //                    }
                     for (int i = 0; i < OSE3_DEPLOY_REGION.size() ; ++i) {
                         withCredentials([string(credentialsId: OSE3_TOKEN_PROJECT[i], variable: 'token')]) {
-                            sh "bash restart_pod.sh -s ${OSE3_DEPLOY_REGION[i]} -t ${token.trim()} -p ${OSE3_DEPLOY_PROJECT} -i ${INTERVAL} -l ${LABEL}"
+                            sh "bash script.sh -s ${OSE3_DEPLOY_REGION[i]} -t ${token.trim()} -p ${OSE3_DEPLOY_PROJECT} -i ${INTERVAL} -l ${LABEL}"
                         }
                     }
                      try{
