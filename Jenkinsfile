@@ -11,7 +11,7 @@ pipeline {
     }
     parameters {
         string(name: 'PROJECT', defaultValue: 'default', description: 'Nombre del proyecto')
-        string(name: 'NAMESPACE', defaultValue: 'default', description: 'Nombre del namespace')
+        string(name: 'SERVER', defaultValue: 'default', description: 'Nombre del server')
         string(name: 'GROUP_SIZE', defaultValue: '10', description: 'Tamaño del grupo de despliegues')
     }
 }
