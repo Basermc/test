@@ -9,4 +9,4 @@ namespace=${NAMESPACE}
 group_size=${GROUP_SIZE}
 project=${PROJECT}
 
-echo $project
+oc login -u system:admin -n santander-dev
