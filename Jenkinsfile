@@ -2,12 +2,7 @@ PROJECT = [['santander-dev']]
 SERVER = [['192.168.99.101:8443']]
 
 pipeline {
-    agent none
-    options {
-        timestamps()
-        ansiColor('vga')
-        buildDiscader(logRotator(numToKeepStr: '50', artifactNumToKeepStr: '50'))
-    }
+    agent any
     stages {
         stage('Ejecutar script') {
             steps {
