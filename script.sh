@@ -2,5 +2,5 @@
 
 
 
-echo hola
+echo $name
 
