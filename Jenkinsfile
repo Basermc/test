@@ -6,7 +6,7 @@ pipeline {
             defaultValue:"",
             description:"",
             )
-        string(
+        int(
             name: "group_size",
             defaultValue:"",
             description:"",
