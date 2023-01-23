@@ -1,7 +1,11 @@
 #!/bin/bash
 
 
-oc login -u system:admin -n $project
+namespace=${NAMESPACE}
+group_size=${GROUP_SIZE}
+project=${PROJECT}
+
+./oc.exe login -u system:admin -n $project
 
 # Validate group size
 if [ $group_size -gt 20 ]; then
