@@ -14,6 +14,6 @@ pipeline {
     parameters {
         string(name: 'PROJECT', defaultValue: 'santander-dev', description: 'Nombre del proyecto')
         string(name: 'SERVER', defaultValue: '192.168.99.101', description: 'Nombre del server')
-        choice(name: 'GROUP_SIZE', choices: ['5', '20', '30', '40'], description: 'Tamaño del grupo de despliegues')
+        choice(name: 'GROUP_SIZE', choices: ['3', '20', '30', '40'], description: 'Tamaño del grupo de despliegues')
     }
 }
