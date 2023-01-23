@@ -5,7 +5,6 @@ while getopts s:t:p:i:l:g:x flag; do
   s) server=${OPTARG} ;;
   t) token=${OPTARG} ;;
   p) project=${OPTARG} ;;
-  i) namespace=${OPTARG};;
   l) label=${OPTARG} ;;
   g) group_size=${OPTARG};;
   
@@ -14,8 +13,8 @@ done
 
 echo "Project: $project"
 echo "Group size: $group_size"
-echo "namespace: $namespace"
 
+oc login system:admin -n ${project} --server=${server}
 # Validate group size
 if [ ${group_size} -gt 20 ]; then
     echo -e "Error: Group size cannot be greater than 20."
