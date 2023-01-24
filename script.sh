@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts s:t:p:i:l:g:x flag; do
+while getopts s:t:p:l:g:x flag; do
   case "${flag}" in
   s) server=${OPTARG} ;;
   t) token=${OPTARG} ;;
@@ -14,7 +14,6 @@ done
 echo "Project: $project"
 echo "Group size: $group_size"
 
-
 # Validate group size
 if [ ${group_size} -gt 20 ]; then
     echo -e "Error: Group size cannot be greater than 20."
@@ -22,7 +21,7 @@ if [ ${group_size} -gt 20 ]; then
 fi
 
 # Obtiene una lista de todos los despliegues en el namespace
-deployments=($(oc get dc -n ${project} -o jsonpath='{.items[*].metadata.name}')
+deployments=($(oc get dc -n ${project} -o jsonpath='{.items[*].metadata.name}'))
 
 # Define el contador
 counter=0
