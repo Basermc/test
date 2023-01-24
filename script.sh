@@ -14,7 +14,7 @@ done
 echo "Project: $project"
 echo "Group size: $group_size"
 echo "Server: $server"
-oc login -u system:admin -n $project
+oc login -u system:admin -n $project --server=$server
 
 # Validate group size
 if [ ${group_size} -gt 20 ]; then
