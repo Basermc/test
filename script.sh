@@ -25,7 +25,7 @@ if [ ${group_size} -gt 20 ]; then
 fi
 
 # Obtiene una lista de todos los despliegues en el namespace
-deployments=($(oc get dc -n ${project} -o name ))
+deployments=($(oc get dc -n ${project} -o jsonpath='{.items[*].metadata.name}'
 
 # Define el contador
 counter=0
