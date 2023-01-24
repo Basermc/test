@@ -14,6 +14,7 @@ done
 echo "Project: $project"
 echo "Group size: $group_size"
 echo "Server: $server"
+echo "Label: $label"
 
 oc login -u system:admin -n $project --server=$server
 
@@ -24,7 +25,7 @@ if [ ${group_size} -gt 20 ]; then
 fi
 
 # Obtiene una lista de todos los despliegues en el namespace
-deployments=($(oc get dc -n ${project} -o jsonpath='{.items[*].metadata.name}'))
+deployments=($(oc get dc -n ${project} -o jsonpath='{.items[*].metadata.name}' -l '$label'))
 
 # Define el contador
 counter=0
