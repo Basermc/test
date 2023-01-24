@@ -7,7 +7,7 @@ pipeline {
         stage('Ejecutar script') {
             steps {
                 script {
-                    sh "oc login https://192.168.99.101:8443 --token=jenkins-token-zs4p2 --insecure-skip-tls-verify"
+                    sh "oc login https://192.168.99.101:8443 --token=deployer-token-pst7q --insecure-skip-tls-verify"
                     sh "bash script.sh  -p ${params.project} -g ${params.group_size}"
                 }
             }
