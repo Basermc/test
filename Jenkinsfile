@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'github-secret', variable: 'GITHUB_SECRET')]) {
-                      sh "oc login https://192.168.99.101:8443 --token=$GITHUB_SECRET --insecure-skip-tls-verify"
+                      sh "oc login https://192.168.99.101:8443 --token=$JENKINS_TOKEN --insecure-skip-tls-verify"
                       sh "bash script.sh  -p ${params.project} -g ${params.group_size}"
                     }
                 }
