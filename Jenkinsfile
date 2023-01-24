@@ -7,6 +7,7 @@ pipeline {
         stage('Ejecutar script') {
             steps {
                 script {
+                    sh "oc login https://192.168.99.101:8443 --token=jenkins-token-r9kc9"
                     sh "bash script.sh  -p ${params.project} -g ${params.group_size}"
                 }
             }
@@ -17,3 +18,4 @@ pipeline {
         string(name: 'group_size', defaultValue: '2', description: 'Tamaño del grupo de despliegues')
     }
 }
+
